@@ -9,39 +9,44 @@ import './App.css';
 const { Header, Footer, Content } = Layout;
 
 class App extends Component {
-  state = {
-    response: '',
-    shortening: false,
-    currentUrl: ''
-  };
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      response: '',
+      shortening: false,
+      currentUrl: ''
+    };
+
+    this.addUrl = this.addUrl.bind(this);
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
+  // componentDidMount() {
+  //   this.callApi()
+  //     .then(res => this.setState({ response: res.express }))
+  //     .catch(err => console.log(err));
+  // }
 
-    if (response.status !== 200) throw Error(body.message);
+  // callApi = async () => {
+  //   const response = await fetch('/api/hello');
+  //   const body = await response.json();
 
-    return body;
-  };
+  //   if (response.status !== 200) throw Error(body.message);
+
+  //   return body;
+  // };
 
   async addUrl(evt) {
+    console.log(this.state.currentUrl);
     const response = await fetch('/api/hello', { 
       method: 'POST',
-      headers: {'Content-Type':'application/json'}, 
-      body: JSON.stringify({name: 'kitten'}) 
+      headers: {'Accept': 'application/json',
+                'Content-Type': 'application/json'}, 
+      body: JSON.stringify({url: this.state.currentUrl}) 
     });
 
-    const body = await response.json();
-
+    const body = await response;
     if (response.status !== 200) throw Error(body.message);
-
-    return body;
   }
 
   render() {
