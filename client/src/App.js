@@ -33,15 +33,28 @@ class App extends Component {
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
 
-    Modal.success({
+    Modal.confirm({
+      className: 'App-modal-surl',
       title: 'Shortened URL Generated',
       content: (
         <div>
           <p>The shortened url is {body.surl}. </p>
-          <span>Click to copy: <CopyToClipboard text={body.surl}><Tag color="geekblue">Copy</Tag></CopyToClipboard></span>
+          {/* <span>Click to copy: <CopyToClipboard text={body.surl}><Tag color="geekblue">Copy</Tag></CopyToClipboard></span> */}
         </div>
       ),
       centered: true,
+      iconType: "check-circle",
+      cancelText: "OK",
+      okText: "Save to Clipboard",
+      // Copy body.surl to clipboard.
+      onOk: () => {
+        const el = document.createElement('textarea');
+        el.value = body.surl;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+      } 
     });
   }
 
