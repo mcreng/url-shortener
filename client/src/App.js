@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { Layout, Input, Button, Row, Col } from "antd";
+import { Layout, Input, Button, Row, Col, notification, Modal, Tag } from "antd";
 
-import logo from './logo.svg';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import './App.css';
 
@@ -32,7 +32,17 @@ class App extends Component {
 
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    console.log(body.surl);
+
+    Modal.success({
+      title: 'Shortened URL Generated',
+      content: (
+        <div>
+          <p>The shortened url is {body.surl}. </p>
+          <span>Click to copy: <CopyToClipboard text={body.surl}><Tag color="geekblue">Copy</Tag></CopyToClipboard></span>
+        </div>
+      ),
+      centered: true,
+    });
   }
 
   render() {
@@ -41,7 +51,7 @@ class App extends Component {
         <Content className="App-content">
           <div align="middle">
             <Row type="flex" justify="space-between" className="App-add-todo-span">
-              <Col span={17} offset={2} >
+              <Col lg={ {span: 17, offset: 2} } sm={24} xs={24}>
                 <Input
                 className="App-url-input"
                 size="large"
@@ -52,7 +62,8 @@ class App extends Component {
                 onPressEnter={this.addUrl}
                 />
               </Col>
-              <Col align="right" span={3}>
+              <Col lg={0} sm={24} xs={24} style={ {padding: '5vh'} } />
+              <Col align="center" lg={3} sm={24} xs={24}>
                 <Button
                   className="App-url-button"
                   size="large"
@@ -61,7 +72,7 @@ class App extends Component {
                   loading={this.state.shortening}
                 >Shorten it!</Button>
               </Col>
-              <Col offset={2}/>
+              <Col lg={2}/>
             </Row>
           </div>
         </Content>
