@@ -1,24 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const knex = require('knex')(require('./knexfile'));
-
+const shortener = require('./shortener');
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json())
 
-app.route('/api/hello')
-    .get((req, res) => {
-        console.log(req);
-        res.send({ express: 'Hello From Express' });
-      })
+app.route('/api/url')
     .post((req, res) => {
-        console.log(req.body.url);
+        surl = shortener.makeid();
         knex('url').insert({
             user_id: '1',
             url: req.body.url,
-            surl: req.body.url
-        }).then(res.sendStatus(200))
+            surl
+        }).then(res.status(200).send({ surl: surl }))
     })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

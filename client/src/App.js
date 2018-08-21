@@ -21,32 +21,18 @@ class App extends Component {
     this.addUrl = this.addUrl.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.callApi()
-  //     .then(res => this.setState({ response: res.express }))
-  //     .catch(err => console.log(err));
-  // }
-
-  // callApi = async () => {
-  //   const response = await fetch('/api/hello');
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) throw Error(body.message);
-
-  //   return body;
-  // };
-
-  async addUrl(evt) {
+   async addUrl(evt) {
     console.log(this.state.currentUrl);
-    const response = await fetch('/api/hello', { 
+    const response = await fetch('/api/url', { 
       method: 'POST',
       headers: {'Accept': 'application/json',
                 'Content-Type': 'application/json'}, 
       body: JSON.stringify({url: this.state.currentUrl}) 
     });
 
-    const body = await response;
+    const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
+    console.log(body.surl);
   }
 
   render() {
