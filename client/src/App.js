@@ -61,6 +61,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header className="App-header">
+          <p>URL Shortener</p>
+        </Header>
         <Content className="App-content">
           <div align="middle">
             <Row type="flex" justify="space-between" className="App-add-todo-span">
@@ -89,6 +92,9 @@ class App extends Component {
             </Row>
           </div>
         </Content>
+        <Footer style={{ textAlign: 'center' }} className="App-footer">
+          Using Nodejs, MySQL, express, knex as backend; React, AntDesign as frontend.
+        </Footer>
       </div>
     );
   }
