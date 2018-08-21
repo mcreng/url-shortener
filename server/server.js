@@ -9,12 +9,14 @@ app.use(bodyParser.json())
 
 app.route('/api/url')
     .post((req, res) => {
-        surl = shortener.makeid();
-        knex('url').insert({
-            user_id: '1',
-            url: req.body.url,
-            surl
-        }).then(res.status(200).send({ surl: surl }))
+        shortener.promiseid().then( surl => {
+            knex('url').insert({
+                user_id: '1',
+                url: req.body.url,
+                surl
+            }).then(res.status(200).send({ surl: surl }))
+        })
+
     })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
