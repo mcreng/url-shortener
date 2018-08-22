@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { Layout, Input, Button, Row, Col, notification, Modal, Tag } from "antd";
 
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-
 import './App.css';
 
 const { Header, Footer, Content } = Layout;
