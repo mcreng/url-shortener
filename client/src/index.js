@@ -21,7 +21,7 @@ ReactDOM.render(
                 isLoggedIn() ? (<Redirect to="/"/>) 
                              : (<Login />)
             )} />
-            {/* <Route render={() => (<Redirect to="/"/>)} /> */}
+            <Route render={() => (<Redirect to="/"/>)} />
         </Switch>
     </BrowserRouter>, 
     document.getElementById('root')
