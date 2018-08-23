@@ -4,11 +4,16 @@ This is a web application that provides url shortening services. I intend to lea
 This project uses:
 - ReactJS and AntDesign as front-end
 - NodeJS, mySQL, express, knex as back-end
+- Heroku as host
 
-To run `url-shortener`,
-- Install npm using [nvm](https://github.com/creationix/nvm).
-- Fix an issue (that happens to me) by referencing [here](https://github.com/npm/npm/issues/8360).
-- Head to root and run
-```npm install``` to install required dependencies.
-- Start by 
-```npm start```.
+To run `url-shortener` locally,
+- `git clone https://github.com/mcreng/url-shortener.git`
+- Head to root and run `npm i` to install required dependencies.
+- Start by `npm run dev`.
+
+To run `url-shortener` on your Heroku host,
+- `git clone https://github.com/mcreng/url-shortener.git`
+- `heroku create`
+- `git push heroku master`
+<!-- - Install npm using [nvm](https://github.com/creationix/nvm).
+- Fix an issue (that happens to me) by referencing [here](https://github.com/npm/npm/issues/8360). -->
