@@ -23,6 +23,8 @@
     "client-test": "cd client && react-scripts test --env=jsdom",
     "client-eject": "cd client && react-scripts eject",
     "server-start": "cd server && nodemon server.js",
-    "start": "concurrently --kill-others-on-fail \"npm run-script server-start \" \"npm run-script client-start\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server-start \" \"npm run client-start\"",
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd client && npm run build"
   }
 }
