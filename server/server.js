@@ -15,14 +15,14 @@ app.route('/api/url')
         res.status(200).send({ connected: true});
     })
     .post((req, res) => {
-        shortener.promiseid().then( surl => {
-            knex('url').insert({
-                user_id: '1',
-                url: req.body.url,
-                surl
-            }).then(res.status(200).send({ surl: surl }))
-        })
-
+        // shortener.promiseid().then( surl => {
+        //     knex('url').insert({
+        //         user_id: '1',
+        //         url: req.body.url,
+        //         surl
+        //     }).then(res.status(200).send({ surl: surl }))
+        // })
+        res.status(200).send({ surl: 'connected' });
     })
 
 app.get('*', (req, res) => {
