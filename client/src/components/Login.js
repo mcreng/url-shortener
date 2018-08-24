@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 import { Layout, Input, Button, Row, Col, notification, Modal, Tag } from "antd";
-import { GoogleLogin } from 'react-google-login';
+import MetaTags from 'react-meta-tags';
+import GoogleLogin from './GoogleLogin';
 
 import './Login.css';
 
 const { Header, Footer, Content } = Layout;
 const responseGoogle = (response) => {
-  console.log(response);
+  console.log(123, response);
 }
 class Login extends Component {
 
   render() {
     return (
       <Content className="App-content">
-        <GoogleLogin
-          clientId="259902397583-h8ub31rj0ob4pf3g1c0tb809qee3155d.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-        />
+        <GoogleLogin />
         <p>Login!</p>
       </Content>
     );
