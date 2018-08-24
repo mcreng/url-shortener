@@ -14,7 +14,7 @@ class Login extends Component {
     return (
       <Content className="App-content">
         <GoogleLogin
-          clientId="259902397583-75dh6cjnfm3iab9v0nsq0dfq7jhif7l1.apps.googleusercontent.com"
+          clientId="259902397583-h8ub31rj0ob4pf3g1c0tb809qee3155d.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
