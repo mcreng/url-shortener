@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 
 function isLoggedIn() {
-    return true;
+    return false;
   }
   
 ReactDOM.render(
