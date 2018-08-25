@@ -10,6 +10,7 @@ To run `url-shortener` locally,
 - `git clone https://github.com/mcreng/url-shortener.git`
 - Head to root and run `npm i` to install required dependencies.
 - Set up PostgreSQL.
+- `knex migrate:latest`
 - Start by `SQL_PW=* npm run dev`.
 
 To run `url-shortener` on your Heroku host,
