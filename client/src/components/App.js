@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Layout, Input, Button, Row, Col, notification, Modal, Tag } from "antd";
+import { Layout, Input, Button, Row, Col, Modal } from "antd";
 
 import './App.css';
 
@@ -19,7 +19,7 @@ class App extends Component {
     this.addUrl = this.addUrl.bind(this);
   }
 
-   async addUrl(evt) {
+   async addUrl() {
     const response = await fetch('/api/url', { 
       method: 'POST',
       headers: {'Accept': 'application/json',

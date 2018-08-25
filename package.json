@@ -9,7 +9,6 @@
     "express": "^4.16.3",
     "knex": "^0.15.2",
     "mysql": "^2.16.0",
-    "nodemon": "^1.18.3",
     "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-copy-to-clipboard": "^5.0.1",
@@ -28,5 +27,11 @@
     "dev": "MODE=dev concurrently --kill-others-on-fail \"npm run server-start \" \"npm run client-start\"",
     "start": "MODE=build node server/server.js",
     "heroku-postbuild": "cd client && npm run build"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.3"
   }
 }
