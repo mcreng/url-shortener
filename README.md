@@ -3,7 +3,7 @@ This is a web application that provides url shortening services. I intend to lea
 
 This project uses:
 - ReactJS and AntDesign as front-end
-- NodeJS, mySQL, express, knex as back-end
+- NodeJS, PostgreSQL, express, knex as back-end
 - Heroku as host
 
 To run `url-shortener` locally,

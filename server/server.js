@@ -10,10 +10,10 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.route('/api/url')
-    .get((req, res) => {
-        console.log('Connected');
-        res.status(200).send({ connected: true});
-    })
+    // .get((req, res) => {
+    //     console.log('Connected');
+    //     res.status(200).send({ connected: true});
+    // })
     .post((req, res) => {
         shortener.promiseid().then( surl => {
             knex('url').insert({
@@ -22,12 +22,11 @@ app.route('/api/url')
                 surl
             }).then(res.status(200).send({ surl: surl }))
         })
-        // res.status(200).send({ surl: 'connected' });
     })
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'../client/build/index.html'));
-    });
+});
       
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

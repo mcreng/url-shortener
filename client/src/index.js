@@ -8,7 +8,7 @@ import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 
 function isLoggedIn() {
     return true;
-  }
+}
   
 ReactDOM.render(
     <BrowserRouter>
@@ -26,4 +26,4 @@ ReactDOM.render(
     </BrowserRouter>, 
     document.getElementById('root')
 );
-// registerServiceWorker();
+registerServiceWorker();
