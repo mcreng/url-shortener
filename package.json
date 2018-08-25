@@ -10,6 +10,7 @@
     "knex": "^0.15.2",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.3",
+    "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.2",
@@ -24,8 +25,8 @@
     "client-test": "cd client && react-scripts test --env=jsdom",
     "client-eject": "cd client && react-scripts eject",
     "server-start": "cd server && nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server-start \" \"npm run client-start\"",
-    "start": "node server/server.js",
+    "dev": "MODE=dev concurrently --kill-others-on-fail \"npm run server-start \" \"npm run client-start\"",
+    "start": "MODE=build node server/server.js",
     "heroku-postbuild": "cd client && npm run build"
   }
 }

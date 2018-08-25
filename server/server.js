@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const knex = require('knex')(require('./knexfile'));
+const knex = require('knex')(require('./knexfile')[process.env.MODE]);
 const shortener = require('./shortener');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,14 +15,14 @@ app.route('/api/url')
         res.status(200).send({ connected: true});
     })
     .post((req, res) => {
-        // shortener.promiseid().then( surl => {
-        //     knex('url').insert({
-        //         user_id: '1',
-        //         url: req.body.url,
-        //         surl
-        //     }).then(res.status(200).send({ surl: surl }))
-        // })
-        res.status(200).send({ surl: 'connected' });
+        shortener.promiseid().then( surl => {
+            knex('url').insert({
+                user_id: '1',
+                url: req.body.url,
+                surl
+            }).then(res.status(200).send({ surl: surl }))
+        })
+        // res.status(200).send({ surl: 'connected' });
     })
 
 app.get('*', (req, res) => {

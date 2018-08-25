@@ -20,7 +20,6 @@ class App extends Component {
   }
 
    async addUrl(evt) {
-    console.log(this.state.currentUrl);
     const response = await fetch('/api/url', { 
       method: 'POST',
       headers: {'Accept': 'application/json',
@@ -91,7 +90,7 @@ class App extends Component {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }} className="App-footer">
-          Using Nodejs, MySQL, express, knex as backend; React, AntDesign as frontend.
+          Using Nodejs, PostgreSQL, express, knex as backend; React, AntDesign as frontend; Heroku as host.
         </Footer>
       </div>
     );

@@ -9,11 +9,15 @@ This project uses:
 To run `url-shortener` locally,
 - `git clone https://github.com/mcreng/url-shortener.git`
 - Head to root and run `npm i` to install required dependencies.
-- Start by `npm run dev`.
+- Set up PostgreSQL.
+- Start by `SQL_PW=* npm run dev`.
 
 To run `url-shortener` on your Heroku host,
 - `git clone https://github.com/mcreng/url-shortener.git`
 - `heroku create`
+- Set up Heroku PostgreSQL
+- Put database URL to `.env`
+- `knex migrate:latest --env build`
 - `git push heroku master`
 <!-- - Install npm using [nvm](https://github.com/creationix/nvm).
 - Fix an issue (that happens to me) by referencing [here](https://github.com/npm/npm/issues/8360). -->
