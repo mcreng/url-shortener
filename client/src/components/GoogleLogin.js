@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import MetaTags from "react-meta-tags";
+import "./GoogleLogin.css";
 
-class GoogleLogin extends Component {
-  constructor(prop) {
-    super(prop);
-    this.onSignin = this.onSignin.bind(this);
-  }
+class Login extends Component {
 
   componentDidMount() {
     var e = document.createElement("script");
@@ -14,11 +11,20 @@ class GoogleLogin extends Component {
     e.src = "https://apis.google.com/js/client:platform.js";
     var t = document.getElementsByTagName("script")[0];
     t.parentNode.insertBefore(e, t);
-  }
 
-  onSignin = response => {
-    console.log(response);
-  };
+    window.onSignin = googleUser => {
+      var id_token = googleUser.getAuthResponse().id_token;
+      console.log(id_token);
+      fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token: id_token })
+      });
+    };
+  }
 
   render() {
     return (
@@ -29,10 +35,12 @@ class GoogleLogin extends Component {
             content="259902397583-g94c052uvh0urlk2r83a711icpuuuqo8.apps.googleusercontent.com"
           />
         </MetaTags>
-        <div className="g-signin2" data-onsuccess={this.onSignIn} />
+        <div className="g-signin2" data-onsuccess="onSignin" />
       </div>
     );
   }
 }
 
-export default GoogleLogin;
+
+
+export default Login;

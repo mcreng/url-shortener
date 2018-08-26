@@ -3,6 +3,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const knex = require('knex')(require('./knexfile')[process.env.MODE]);
 const shortener = require('./shortener');
+const {verifyID} = require('./verify');
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -10,10 +13,6 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.route('/api/url')
-    // .get((req, res) => {
-    //     console.log('Connected');
-    //     res.status(200).send({ connected: true});
-    // })
     .post((req, res) => {
         shortener.promiseid().then((surl) => {
             knex('url').insert({
@@ -25,6 +24,17 @@ app.route('/api/url')
             }));
         });
     });
+
+app.route('/api/auth')
+    .post((req, res) => {
+        var token = req.body.token;
+        console.log(token);
+        verifyID(token).catch(console.error).then(
+            res.status(200).send({
+                auth: true
+            })
+        )
+    })
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '../client/build/index.html'));
