@@ -15,17 +15,19 @@ app.route('/api/url')
     //     res.status(200).send({ connected: true});
     // })
     .post((req, res) => {
-        shortener.promiseid().then( (surl) => {
+        shortener.promiseid().then((surl) => {
             knex('url').insert({
                 user_id: '1',
                 url: req.body.url,
                 surl,
-            }).then(res.status(200).send({surl: surl}));
+            }).then(res.status(200).send({
+                surl: surl
+            }));
         });
     });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'../client/build/index.html'));
+    res.sendFile(path.join(__dirname + '../client/build/index.html'));
 });
 
 
