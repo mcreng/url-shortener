@@ -10,7 +10,7 @@ import Async from 'react-promise';
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => fakeAuth.isAuthenticated ? (
+    render={props => fakeAuth.isAuthenticated || checkAuth() ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -23,6 +23,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     
   />
 );
+
+async function checkAuth() {
+  await fetch("/api/auth")
+  .then( req => req.json() )
+  .then( req => req.auth )
+  .then(b => fakeAuth.authenticate(b))
+}
 
 ReactDOM.render(
   <BrowserRouter>

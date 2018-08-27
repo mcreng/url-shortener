@@ -8,7 +8,7 @@ import "./Login.css";
 const { Header, Footer, Content } = Layout;
 
 const fakeAuth = {
-  isAuthenticated: false,
+  isAuthenticated: null,
   authenticate(tf, cb) {
     // fetch("/api/auth")
     // .then( req => req.json() )
@@ -53,18 +53,6 @@ class Login extends Component {
       }).then( req => req.json() )
       .then( req =>  fakeAuth.authenticate(req, this.setState({ redirectToReferrer: true})))}
   }
-
-  componentWillMount() {
-    fetch("/api/auth")
-    .then( req => req.json() )
-    .then( req => req.auth )
-    .then(b => fakeAuth.authenticate(b, this.setState({ redirectToReferrer: true})))
-  }
-
-
-      // .then(fakeAuth.authenticate(() => {
-      //   this.setState({ redirectToReferrer: true });
-      // }))
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: "/" } };
