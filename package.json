@@ -7,17 +7,22 @@
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.0",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "google-auth-library": "^1.6.1",
     "knex": "^0.15.2",
     "mysql": "^2.16.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
     "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.2",
     "react-meta-tags": "^0.4.2",
+    "react-promise": "^2.0.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "client-start": "cd client && react-scripts start",

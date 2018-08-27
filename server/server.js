@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const knex = require('knex')(require('./knexfile')[process.env.MODE]);
 const shortener = require('./shortener');
 const {verifyID} = require('./verify');
+const session = require('express-session');
+const uuid = require('uuid/v4');
 
 
 const app = express();
@@ -11,6 +13,16 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(session({
+    genid: (req) => {
+      console.log(`Request object sessionID from client: ${req.sessionID}`)
+      return uuid() // use UUIDs for session IDs
+    },
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    // cookie  : { maxAge  : new Date(Date.now() + (1000 * 60)) }
+}))
 
 app.route('/api/url')
     .post((req, res) => {
@@ -28,16 +40,22 @@ app.route('/api/url')
 app.route('/api/auth')
     .post((req, res) => {
         var token = req.body.token;
-        console.log(token);
         verifyID(token).catch(console.error).then(
             res.status(200).send({
-                auth: true
+                auth: req.session.auth = true,
+                sessionID: req.sessionID
             })
         )
     })
+    .get((req, res) => {
+        res.send({
+            auth: req.session.auth || false,
+            sessionID: req.sessionID
+        })
+    })
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../client/build/index.html'));
+    res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
 

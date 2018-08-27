@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import { Layout, Input, Button, Row, Col, Modal } from "antd";
-
 import "./App.css";
 
 const { Header, Footer, Content } = Layout;
@@ -54,7 +52,15 @@ class App extends Component {
         document.body.removeChild(el);
       }
     });
+    
   }
+
+  async isLoggedIn() {
+    await fetch("/api/auth")
+    .then( req => req.json() )
+    .then( req => this.setState({ auth: req.auth }));
+  }
+
 
   render() {
     return (

@@ -8,7 +8,6 @@ async function verifyID(token) {
   });
   const payload = ticket.getPayload();
   const userid = payload['sub'];
-  console.log(userid);
 }
 
 module.exports = { verifyID }

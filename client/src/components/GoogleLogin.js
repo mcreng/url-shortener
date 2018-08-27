@@ -14,7 +14,6 @@ class Login extends Component {
 
     window.onSignin = googleUser => {
       var id_token = googleUser.getAuthResponse().id_token;
-      console.log(id_token);
       fetch("/api/auth", {
         method: "POST",
         headers: {
@@ -22,7 +21,7 @@ class Login extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ token: id_token })
-      });
+      })
     };
   }
 
@@ -35,7 +34,7 @@ class Login extends Component {
             content="259902397583-g94c052uvh0urlk2r83a711icpuuuqo8.apps.googleusercontent.com"
           />
         </MetaTags>
-        <div className="g-signin2" data-onsuccess="onSignin" />
+        <div className="g-signin2" data-onsuccess="onSignin"></div> />
       </div>
     );
   }
