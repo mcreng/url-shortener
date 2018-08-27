@@ -41,7 +41,6 @@ class Login extends Component {
     e.src = "https://apis.google.com/js/client:platform.js";
     var t = document.getElementsByTagName("script")[0];
     t.parentNode.insertBefore(e, t);
-
     window.onSignin = googleUser => {
       var id_token = googleUser.getAuthResponse().id_token;
       fetch("/api/auth", {
@@ -52,12 +51,20 @@ class Login extends Component {
         },
         body: JSON.stringify({ token: id_token })
       }).then( req => req.json() )
-      .then( req =>  fakeAuth.authenticate(req, this.setState({ redirectToReferrer: true})))
+      .then( req =>  fakeAuth.authenticate(req, this.setState({ redirectToReferrer: true})))}
+  }
+
+  componentWillMount() {
+    fetch("/api/auth")
+    .then( req => req.json() )
+    .then( req => req.auth )
+    .then(b => fakeAuth.authenticate(b, this.setState({ redirectToReferrer: true})))
+  }
+
+
       // .then(fakeAuth.authenticate(() => {
       //   this.setState({ redirectToReferrer: true });
       // }))
-    };
-  }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: "/" } };
@@ -76,9 +83,8 @@ class Login extends Component {
               content="259902397583-g94c052uvh0urlk2r83a711icpuuuqo8.apps.googleusercontent.com"
             />
           </MetaTags>
-          <div className="g-signin2" data-onsuccess="onSignin"></div> />
+          <div className="g-signin2" data-onsuccess="onSignin"></div>
         </div>
-        <p>Login!</p>
       </Content>
     );
   }
