@@ -8,15 +8,8 @@ import "./Login.css";
 const { Header, Footer, Content } = Layout;
 
 const fakeAuth = {
-  isAuthenticated: null,
+  isAuthenticated: false,
   authenticate(tf, cb) {
-    // fetch("/api/auth")
-    // .then( req => req.json() )
-    // .then( req => req.auth )
-    // .then(b => {
-    //   this.isAuthenticated = b;
-    //   console.log(b)
-    // });
     this.isAuthenticated = tf;
     cb();
   },
