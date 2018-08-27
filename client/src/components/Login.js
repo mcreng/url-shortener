@@ -6,12 +6,32 @@ import { Layout } from "antd";
 import "./Login.css";
 
 const { Header, Footer, Content } = Layout;
+
+const fakeAuth = {
+  isAuthenticated: false,
+  authenticate(tf, cb) {
+    // fetch("/api/auth")
+    // .then( req => req.json() )
+    // .then( req => req.auth )
+    // .then(b => {
+    //   this.isAuthenticated = b;
+    //   console.log(b)
+    // });
+    this.isAuthenticated = tf;
+    cb();
+  },
+  // signout(cb) {
+  //   this.isAuthenticated = false;
+  //   setTimeout(cb, 100);
+  // }
+};
+
 class Login extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      redirect: false
-    }
+      redirectToReferrer: false
+    };
   }
 
   componentDidMount() {
@@ -31,17 +51,20 @@ class Login extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ token: id_token })
-      }).then(this.setState({redirect: true}))
+      }).then( req => req.json() )
+      .then( req =>  fakeAuth.authenticate(req, this.setState({ redirectToReferrer: true})))
+      // .then(fakeAuth.authenticate(() => {
+      //   this.setState({ redirectToReferrer: true });
+      // }))
     };
   }
 
-  // componentDidUpdate() {
-  //   this.setState({ redirect: false });
-  // }
-
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={{pathname: "/", state: { redirect: false }}}/>
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) {
+      return <Redirect to={from} />;
     }
     return (
 
@@ -61,4 +84,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export {fakeAuth, Login};
