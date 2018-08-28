@@ -32,7 +32,7 @@ class Login extends Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ token: id_token, name: profile.getName(), image: profile.getImageUrl() })
+        body: JSON.stringify({ token: id_token })
       }).then( req => req.json() )
       .then( req => {
         if (req) {

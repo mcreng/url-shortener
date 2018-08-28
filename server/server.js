@@ -40,19 +40,27 @@ app.route('/api/url')
 app.route('/api/auth')
     .post((req, res) => {
         var token = req.body.token;
-        verifyID(token).catch(console.error).then(
-            req.session.name = req.body.name).then(
-            req.session.image = req.body.image).then(
+        verifyID(token)
+        .catch(console.error)
+        // .then( payload => {
+        //     console.log(payload);
+        //     return payload;
+        // })
+        .then( (ticket => {
+            const payload = ticket.getPayload();
+            req.session.token = token;
+            req.session.user_id = payload['sub'];
+            req.session.name = payload['name'];
+            req.session.image = payload['picture'];
             res.status(200).send({
-                auth: req.session.auth = true,
+                auth: req.session.auth = true
             })
-        )
+        }))
     })
     .get((req, res) => {
         res.send({
             auth: req.session.auth || false,
-            name: req.session.name,
-            image: req.session.image
+            token: req.session.token
         })
     })
 
