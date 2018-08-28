@@ -22,6 +22,10 @@ const Auth = {
     },
     getImageUrl() {
         return this.userImage;
+    },
+    resetUser() {
+        this.setName(null);
+        this.setImage(null);
     }
     // signout(cb) {
     //   this.isAuthenticated = false;

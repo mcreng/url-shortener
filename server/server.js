@@ -56,6 +56,11 @@ app.route('/api/auth')
         })
     })
 
+app.route('/api/auth/logout')
+    .post((req, res) => {
+        req.session.destroy();
+    })
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
