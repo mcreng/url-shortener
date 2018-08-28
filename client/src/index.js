@@ -22,17 +22,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 async function checkAuth() {
+  if (Auth.getToken()) return
   return fetch("/api/auth")
   .then( req => req.json() )
   .then( async req => {
-      await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${req.token}`)
-      .then( authreq => authreq.json() )
-      .then( authreq => {
-          Auth.setName(authreq.name);
-          Auth.setImage(authreq.picture);
-          Auth.authenticate(req.auth, () => {})
-      })
-      .catch(console.error)
+      if (req.auth) {
+        await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${req.token}`)
+        .then( authreq => authreq.json() )
+        .then( authreq => {
+            Auth.setName(authreq.name);
+            Auth.setImage(authreq.picture);
+            Auth.authenticate(req.auth, () => {})
+        })
+        .catch(console.error)
+      }
     }
   )
 }

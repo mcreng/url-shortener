@@ -25,7 +25,6 @@ class Login extends Component {
     t.parentNode.insertBefore(e, t);
     window.onSignin = googleUser => {
       var id_token = googleUser.getAuthResponse().id_token;
-      var profile = googleUser.getBasicProfile();
       fetch("/api/auth", {
         method: "POST",
         headers: {
@@ -36,7 +35,7 @@ class Login extends Component {
       }).then( req => req.json() )
       .then( req => {
         if (req) {
-          Auth.setUser(googleUser.getBasicProfile());
+          Auth.setUser(googleUser);
           Auth.authenticate(req, this.setState({ redirectToReferrer: true }));
         } else {
           console.log("Not authenticated...");
