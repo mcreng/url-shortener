@@ -28,7 +28,7 @@ app.route('/api/url')
     .post((req, res) => {
         shortener.promiseid().then((surl) => {
             knex('url').insert({
-                user_id: '1',
+                user_id: req.session.user_id,
                 url: req.body.url,
                 surl,
             }).then(res.status(200).send({
