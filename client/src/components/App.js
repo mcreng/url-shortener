@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Input, Button, Row, Col, Modal } from "antd";
 import "./App.css";
+import UserDisplay from "./UserDisplay";
 
 const { Header, Footer, Content } = Layout;
 
@@ -66,7 +67,14 @@ class App extends Component {
     return (
       <div className="App">
         <Header className="App-header">
-          <p>URL Shortener</p>
+          <Row className="App-header-user" type="flex" align="middle">
+            <Col className="App-header-user-col" span={6} offset={9}>
+              <p>URL Shortener</p>
+            </Col>
+            <Col className="App-header-user-col" span={5} offset={2}>
+              <UserDisplay/>
+            </Col>
+          </Row>
         </Header>
         <Content className="App-content">
           <div align="middle">

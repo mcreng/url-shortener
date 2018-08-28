@@ -2,22 +2,11 @@ import React, { Component } from "react";
 import MetaTags from "react-meta-tags";
 import { Redirect } from "react-router-dom";
 import { Layout } from "antd";
+import Auth from "./Auth";
 
 import "./Login.css";
 
 const { Header, Footer, Content } = Layout;
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(tf, cb) {
-    this.isAuthenticated = tf;
-    cb();
-  },
-  // signout(cb) {
-  //   this.isAuthenticated = false;
-  //   setTimeout(cb, 100);
-  // }
-};
 
 class Login extends Component {
   constructor(prop) {
@@ -36,15 +25,25 @@ class Login extends Component {
     t.parentNode.insertBefore(e, t);
     window.onSignin = googleUser => {
       var id_token = googleUser.getAuthResponse().id_token;
+      var profile = googleUser.getBasicProfile();
       fetch("/api/auth", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ token: id_token })
+        body: JSON.stringify({ token: id_token, name: profile.getName(), image: profile.getImageUrl() })
       }).then( req => req.json() )
-      .then( req =>  fakeAuth.authenticate(req, this.setState({ redirectToReferrer: true})))}
+      .then( req => {
+        if (req) {
+          Auth.setUser(googleUser.getBasicProfile());
+          Auth.authenticate(req, this.setState({ redirectToReferrer: true }));
+        } else {
+          console.log("Not authenticated...");
+        }
+      })
+
+    }
   }
 
   render() {
@@ -71,4 +70,4 @@ class Login extends Component {
   }
 }
 
-export {fakeAuth, Login};
+export default Login;

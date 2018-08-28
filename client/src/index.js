@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
-import {fakeAuth, Login} from "./components/Login";
+import Login from "./components/Login";
+import Auth from "./components/Auth";
 import registerServiceWorker from "./registerServiceWorker";
 import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import Async from 'react-promise';
@@ -12,7 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={props => 
       <Async promise={checkAuth()} then={() => 
-        fakeAuth.isAuthenticated 
+        Auth.isAuthenticated 
         ? (<Component {...props} />) 
         : (<Redirect to={{pathname: "/login", state: { from: props.location }}}/>)
       }/>
@@ -23,8 +24,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 async function checkAuth() {
   return fetch("/api/auth")
   .then( req => req.json() )
-  .then( req => req.auth )
-  .then(b => fakeAuth.authenticate(b, () => {}))
+  .then( req => {
+    Auth.setName(req.name);
+    Auth.setImage(req.image);
+    Auth.authenticate(req.auth, () => {})
+  })
 }
 
 ReactDOM.render(

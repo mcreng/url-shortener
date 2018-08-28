@@ -41,16 +41,18 @@ app.route('/api/auth')
     .post((req, res) => {
         var token = req.body.token;
         verifyID(token).catch(console.error).then(
+            req.session.name = req.body.name).then(
+            req.session.image = req.body.image).then(
             res.status(200).send({
                 auth: req.session.auth = true,
-                sessionID: req.sessionID
             })
         )
     })
     .get((req, res) => {
         res.send({
             auth: req.session.auth || false,
-            sessionID: req.sessionID
+            name: req.session.name,
+            image: req.session.image
         })
     })
 

@@ -14,6 +14,14 @@
   line-height: 10vh;
 }
 
+.App-header-user {
+  height: 10vh;
+}
+
+.App-header-user-col {
+  height: 10vh;
+}
+
 .App-content {
   padding-top: 25vh;
   min-height: 85vh;
