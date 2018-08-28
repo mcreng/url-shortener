@@ -4,6 +4,7 @@ const Auth = {
     token: null,
     userName: null,
     userImage: null,
+    disconnect: null,
     authenticate(tf, cb) {
         this.isAuthenticated = tf;
         cb();
@@ -15,6 +16,7 @@ const Auth = {
         this.token = user.getAuthResponse().id_token;
         this.userName = user.getBasicProfile().getName();
         this.userImage = user.getBasicProfile().getImageUrl();
+        this.disconnect = user.disconnect;
     },
     setName(name) {
         this.userName = name;
@@ -35,6 +37,7 @@ const Auth = {
         this.setToken(null);
         this.setName(null);
         this.setImage(null);
+        this.disconnect = null;
     }
     // signout(cb) {
     //   this.isAuthenticated = false;

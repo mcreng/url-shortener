@@ -16,6 +16,7 @@ class UserDisplay extends Component {
 
   logout() {
     Auth.authenticate(false, () => {})
+    Auth.disconnect();
     Auth.resetUser();
     fetch("/api/auth/logout", {
       method: "POST"
