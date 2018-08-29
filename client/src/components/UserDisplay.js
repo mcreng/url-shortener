@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { Layout, Button, Avatar } from "antd";
+import { Button, Avatar } from "antd";
 import { Redirect } from "react-router-dom";
 import Auth from "./Auth";
 
 import "./UserDisplay.css";
-
-const { Header, Footer, Content } = Layout;
 
 class UserDisplay extends Component {
   constructor(prop) {

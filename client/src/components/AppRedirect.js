@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import { Layout, Input, Button, Row, Col, Modal } from "antd";
-// import "./App.css";
-
-const { Header, Footer, Content } = Layout;
 
 class AppRedirect extends Component {
   constructor(prop) {

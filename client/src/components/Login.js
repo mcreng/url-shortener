@@ -6,7 +6,7 @@ import Auth from "./Auth";
 
 import "./Login.css";
 
-const { Header, Footer, Content } = Layout;
+const { Content } = Layout;
 
 class Login extends Component {
   constructor(prop) {
