@@ -61,20 +61,23 @@ app.route('/api/auth')
             req.session.image = payload['picture'];
             res.status(200).send({
                 auth: req.session.auth = true
-            }).then(console.log(`${req.session.user_id} authenticated with ${req.sessionID}`))
+            })
+            console.log(`${req.session.user_id} authenticated with ${req.sessionID}`)
         }))
     })
     .get((req, res) => {
         res.send({
             auth: req.session.auth || false,
             token: req.session.token
-        }).then(console.log(`${req.session.user_id} ${req.session.auth || false ? '' : 'not'} authenticated with ${req.sessionID}`))
+        })
+        console.log(`${req.session.user_id} ${req.session.auth || false ? '' : 'not'} authenticated with ${req.sessionID}`)
     })
 
 app.route('/api/auth/logout')
     .post((req, res) => {
         req.session.destroy();
-    }).then(console.log(`${req.session.user_id} with session ID ${req.sessionID} logged out`))
+        console.log(`${req.session.user_id} with session ID ${req.sessionID} logged out`)
+    })
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/index.html'));
