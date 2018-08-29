@@ -15,7 +15,12 @@ class App extends Component {
     };
 
     this.addUrl = this.addUrl.bind(this);
+    this.urlFormatter = this.urlFormatter.bind(this);
   }
+
+  urlFormatter = (str) => 
+    ((str.match(/.+:\/\/\S+/g) ? "" : "http://") + str).replace(/\s/g, '');
+  
 
   async addUrl() {
     const response = await fetch("/api/url", {
@@ -24,7 +29,7 @@ class App extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ url: this.state.currentUrl })
+      body: JSON.stringify({ url: this.urlFormatter(this.state.currentUrl) })
     });
 
     const body = await response.json();

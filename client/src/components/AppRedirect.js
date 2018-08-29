@@ -12,21 +12,28 @@ class AppRedirect extends Component {
 
 
   async componentWillMount() {
-    await fetch("/api/redirect", {
+    const response = await fetch("/api/redirect", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ surl: this.props.match.params.id })
-    }).then( res => res.json() )
-    .then( res => this.setState( {url: res.url, fetched: true }) )
-  }
+    })
+    if (response.status !== 404) {
+        const body = await response.json();
+        this.setState({url: body.url, fetched: true})
+    } else {
+        this.setState({fetched: true})
+    }
+
+
+}
 
   render() {
     if (this.state.fetched) {
         if (this.state.url) {
-            window.location = ("https://" + this.state.url)
+            window.location = this.state.url
             return (<p>Redirecting...</p>)
         } else return (<p>Website not found</p>);
     } else {
