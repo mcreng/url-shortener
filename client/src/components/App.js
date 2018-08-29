@@ -35,8 +35,7 @@ class App extends Component {
       title: "Shortened URL Generated",
       content: (
         <div>
-          <p>The shortened url is {body.surl}. </p>
-          {/* <span>Click to copy: <CopyToClipboard text={body.surl}><Tag color="geekblue">Copy</Tag></CopyToClipboard></span> */}
+          <p>The shortened url is {process.env.MODE ? "mcreng-url-shortener.herokuapp.com/" : "localhost:3000/"}{body.surl}. </p>
         </div>
       ),
       centered: true,
@@ -46,7 +45,7 @@ class App extends Component {
       // Copy body.surl to clipboard.
       onOk: () => {
         const el = document.createElement("textarea");
-        el.value = body.surl;
+        el.value = process.env.MODE ? "mcreng-url-shortener.herokuapp.com/" : "localhost:3000/" + body.surl;
         document.body.appendChild(el);
         el.select();
         document.execCommand("copy");
@@ -55,13 +54,6 @@ class App extends Component {
     });
     
   }
-
-  async isLoggedIn() {
-    await fetch("/api/auth")
-    .then( req => req.json() )
-    .then( req => this.setState({ auth: req.auth }));
-  }
-
 
   render() {
     return (

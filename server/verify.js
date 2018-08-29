@@ -1,10 +1,10 @@
 const { OAuth2Client } = require('google-auth-library');
-const client = new OAuth2Client("259902397583-g94c052uvh0urlk2r83a711icpuuuqo8.apps.googleusercontent.com");
+const client = new OAuth2Client(process.env.GOOGLE_URL);
 
 async function verifyID(token) {
   return client.verifyIdToken({
       idToken: token,
-      audience: "259902397583-g94c052uvh0urlk2r83a711icpuuuqo8.apps.googleusercontent.com"
+      audience: process.env.GOOGLE_URL
   });
 }
 

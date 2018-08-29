@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
+import AppRedirect from "./components/AppRedirect"
 import Login from "./components/Login";
 import Auth from "./components/Auth";
 import registerServiceWorker from "./registerServiceWorker";
@@ -45,6 +46,8 @@ ReactDOM.render(
     <Switch>
       <PrivateRoute exact path="/" component={App} />
       <Route exact path="/login" component={Login}/>
+      <Route path="/:id" render={(props) => (
+      <AppRedirect {...this.props} {...props}/>)}/>
       {/* <Route render={() => <Redirect to="/" />} /> */}
     </Switch>
   </BrowserRouter>,

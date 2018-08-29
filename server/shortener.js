@@ -1,4 +1,4 @@
-const knex = require('knex')(require('./knexfile')[process.env.MODE]);
+const knex = require('knex')(require('./knexfile')[process.env.MODE || "dev"]);
 
 function promiseid() {
     return new Promise( (resolve, reject) => {

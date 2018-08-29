@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const knex = require('knex')(require('./knexfile')[process.env.MODE]);
+const knex = require('knex')(require('./knexfile')[process.env.MODE || "dev"]);
 const shortener = require('./shortener');
 const {verifyID} = require('./verify');
 const session = require('express-session');
@@ -37,15 +37,20 @@ app.route('/api/url')
         });
     });
 
+app.route('/api/redirect')
+    .post((req, res) => {
+        knex('url').select('url').where('surl', req.body.surl)
+        .then( r => {
+            if (r.length == 0) res.sendStatus(404)
+            else res.status(302).send({ url: r[0].url }) 
+        })
+    });
+
 app.route('/api/auth')
     .post((req, res) => {
         var token = req.body.token;
         verifyID(token)
         .catch(console.error)
-        // .then( payload => {
-        //     console.log(payload);
-        //     return payload;
-        // })
         .then( (ticket => {
             const payload = ticket.getPayload();
             req.session.token = token;
