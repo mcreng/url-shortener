@@ -7,7 +7,7 @@ module.exports = {
     // }
     dev: {
         client: 'pg',
-        connection: 'postgres://url_grp:'+process.env.SQL_PW+'@localhost/url_shortener'
+        connection: process.env.DATABASE_URL
     },
     build: {
         client: 'pg',
