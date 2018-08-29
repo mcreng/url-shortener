@@ -33,7 +33,8 @@ app.route('/api/url')
                 surl,
             }).then(res.status(200).send({
                 surl: surl
-            }));
+            }))
+            .then(console.log(`${req.body.url} shortened to ${surl}.`));
         });
     });
 
@@ -43,6 +44,7 @@ app.route('/api/redirect')
         .then( r => {
             if (r.length == 0) res.sendStatus(404)
             else res.status(302).send({ url: r[0].url }) 
+            console.log(`${req.body.surl} redirected to ${r[0].url}`)
         })
     });
 
@@ -59,20 +61,20 @@ app.route('/api/auth')
             req.session.image = payload['picture'];
             res.status(200).send({
                 auth: req.session.auth = true
-            })
+            }).then(console.log(`${req.session.user_id} authenticated with ${req.sessionID}`))
         }))
     })
     .get((req, res) => {
         res.send({
             auth: req.session.auth || false,
             token: req.session.token
-        })
+        }).then(console.log(`${req.session.user_id} ${req.session.auth || false ? '' : 'not'} authenticated with ${req.sessionID}`))
     })
 
 app.route('/api/auth/logout')
     .post((req, res) => {
         req.session.destroy();
-    })
+    }).then(console.log(`${req.session.user_id} with session ID ${req.sessionID} logged out`))
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/index.html'));
