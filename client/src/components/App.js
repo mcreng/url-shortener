@@ -40,7 +40,6 @@ class App extends Component {
       title: "Shortened URL Generated",
       content: (
         <div>
-          <p>132{process.env.MODE}</p>
           <p>The shortened url is {window.location.href}{body.surl}. </p>
         </div>
       ),
