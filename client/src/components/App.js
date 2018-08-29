@@ -40,7 +40,7 @@ class App extends Component {
       title: "Shortened URL Generated",
       content: (
         <div>
-          <p>The shortened url is {process.env.MODE ? "mcreng-url-shortener.herokuapp.com/" : "localhost:3000/"}{body.surl}. </p>
+          <p>The shortened url is {process.env.MODE == "build" ? "mcreng-url-shortener.herokuapp.com/" : "localhost:3000/"}{body.surl}. </p>
         </div>
       ),
       centered: true,
