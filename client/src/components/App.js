@@ -40,7 +40,8 @@ class App extends Component {
       title: "Shortened URL Generated",
       content: (
         <div>
-          <p>The shortened url is {process.env.MODE == "build" ? "mcreng-url-shortener.herokuapp.com/" : "localhost:3000/"}{body.surl}. </p>
+          <p>132{process.env.MODE}</p>
+          <p>The shortened url is {window.location.href}{body.surl}. </p>
         </div>
       ),
       centered: true,
@@ -50,7 +51,7 @@ class App extends Component {
       // Copy body.surl to clipboard.
       onOk: () => {
         const el = document.createElement("textarea");
-        el.value = process.env.MODE ? "mcreng-url-shortener.herokuapp.com/" : "localhost:3000/" + body.surl;
+        el.value = window.location.href + body.surl;
         document.body.appendChild(el);
         el.select();
         document.execCommand("copy");

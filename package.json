@@ -31,7 +31,7 @@
     "client-eject": "cd client && react-scripts eject",
     "server-start": "cd server && nodemon server.js",
     "dev": "set -a && . ./.env.local && set +a && concurrently --kill-others-on-fail \"npm run server-start \" \"npm run client-start\"",
-    "start": "MODE=build node server/server.js",
+    "start": "node server/server.js",
     "heroku-postbuild": "cd client && npm run build"
   },
   "devDependencies": {
