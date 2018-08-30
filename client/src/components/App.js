@@ -23,6 +23,7 @@ class App extends Component {
   
 
   async addUrl() {
+    this.setState({ shortening: true })
     const response = await fetch("/api/url", {
       method: "POST",
       headers: {
@@ -32,7 +33,7 @@ class App extends Component {
       body: JSON.stringify({ url: this.urlFormatter(this.state.currentUrl) })
     });
 
-    const body = await response.json();
+    const body = await response.json().then( this.setState({ shortening: false }));
     if (response.status !== 200) throw Error(body.message);
 
     Modal.confirm({
