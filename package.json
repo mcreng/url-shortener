@@ -6,6 +6,7 @@
     "antd": "^3.8.2",
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.0",
+    "connect-mongo": "^2.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "google-auth-library": "^1.6.1",

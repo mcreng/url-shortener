@@ -7,13 +7,14 @@ This project uses:
 - ReactJS and AntDesign as front-end
 - NodeJS, PostgreSQL, express, knex as back-end
 - Google OAuth2 as authentication
+- express-session, session-mongo and mLab as session storage
 - Heroku as host
 
 To run `url-shortener` locally,
 
 - `git clone https://github.com/mcreng/url-shortener.git`
 - Head to root and run `npm i` to install required dependencies
-- Set up PostgreSQL and Google API
+- Set up PostgreSQL, MongoDB and Google API
 - Duplicate `.env.example` to `.env.local` and fill in the details
 - `cd server && knex migrate:latest`
 - Start by `npm run dev`
@@ -22,7 +23,7 @@ To run `url-shortener` on your Heroku host,
 
 - `git clone https://github.com/mcreng/url-shortener.git`
 - `heroku create`
-- Set up Heroku PostgreSQL and Google API
+- Set up Heroku PostgreSQL, MongoDB and Google API
 - Duplicate `.env.example` to `.env` and fill in the details
 - `cd server && knex migrate:latest --env build`
 - `git push heroku master`

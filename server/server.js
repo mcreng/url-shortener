@@ -5,6 +5,7 @@ const knex = require('knex')(require('./knexfile')[process.env.MODE || "dev"]);
 const shortener = require('./shortener');
 const {verifyID} = require('./verify');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const uuid = require('uuid/v4');
 
 
@@ -21,6 +22,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
+    store: new MongoStore({url: process.env.SESSION_DB_URL})
     // cookie  : { maxAge  : new Date(Date.now() + (1000 * 60)) }
 }))
 
