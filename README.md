@@ -27,6 +27,7 @@ To run `url-shortener` on your Heroku host,
 - Duplicate `.env.example` to `.env` and fill in the details
 - `cd server && knex migrate:latest --env build`
 - `git push heroku master`
+- If you are not commiting `.env` due to sensitive data (let's say you are also pushing to GitHub), use `heroku config:add $(cat .env)`.
 
 <!-- - Install npm using [nvm](https://github.com/creationix/nvm).
 - Fix an issue (that happens to me) by referencing [here](https://github.com/npm/npm/issues/8360). -->
