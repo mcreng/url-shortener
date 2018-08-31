@@ -33,8 +33,3 @@
   line-height: 5vh;
   padding: 0 0;
 }
-
-/* workaround for not being able to modify the color of anticon */
-.App-modal-surl .anticon {
-  color: #52c41a !important;
-}

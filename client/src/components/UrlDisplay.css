@@ -1,17 +1,8 @@
 @import "~antd/dist/antd.css";
 
-.App {
-  text-align: center;
-}
-
 span.user-span {
     color: white;
     line-height: 10vh;
     font-size: 2vh;
 }
 
-.user-avatar {
-  margin-left: 1vw;
-  margin-right: 1vw;
-  max-height: 10vh;
-}

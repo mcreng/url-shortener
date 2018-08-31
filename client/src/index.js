@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./components/App";
+import App from "./App";
 import AppRedirect from "./components/AppRedirect"
 import Login from "./components/Login";
 import Auth from "./components/Auth";
