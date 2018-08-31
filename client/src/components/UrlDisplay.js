@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Layout, Input, Button, Row, Col, Table, Divider } from "antd";
+import { Table, Divider } from "antd";
 import CopyToClipboard from "./CopyToClipboard";
-
-const { Header, Footer, Content } = Layout;
-
+import './UrlDisplay.css'
 class UrlDisplay extends Component {
   
   constructor(prop) {
@@ -41,7 +39,7 @@ class UrlDisplay extends Component {
 
   render() {
     return (
-        <Table dataSource={this.state.data} columns={this.columns} scroll={{ x: 1500, y: 300 }} />
+        <Table className="url-display-table" dataSource={this.state.data} columns={this.columns} scroll={{ x: 1500, y: 300 }} />
     );
   }
 }

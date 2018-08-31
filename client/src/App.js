@@ -23,8 +23,8 @@ class App extends Component {
           </Row>
         </Header>
         <Content className="App-content">
-          <UrlInput/>
-          <UrlDisplay/>
+          <UrlInput className="App-url-input"/>
+          <UrlDisplay className="App-url-display"/>
         </Content>
         <Footer style={{ textAlign: "center" }} className="App-footer">
           Using Nodejs, PostgreSQL, express, knex as backend; React, AntDesign

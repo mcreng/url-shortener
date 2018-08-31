@@ -55,7 +55,7 @@ class UrlInput extends Component {
 
   render() {
     return (
-        <div align="middle">
+      <div align="middle">
         <Row
             type="flex"
             justify="space-between"
@@ -88,7 +88,7 @@ class UrlInput extends Component {
             </Col>
             <Col lg={2} />
         </Row>
-        </div>
+      </div>
     );
   }
 }
