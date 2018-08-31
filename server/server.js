@@ -27,6 +27,14 @@ app.use(session({
 }))
 
 app.route('/api/url')
+    .get((req, res) => {
+        knex('url').select('id as key', 'url', 'surl').where('user_id', req.session.user_id)
+        .then( r => {
+            if (r.length == 0) res.sendStatus(404)
+            else res.status(302).send(r) 
+            console.log(`Requested all url/surl data from ${req.session.user_id}.`)
+        })
+    })
     .post((req, res) => {
         shortener.promiseid().then((surl) => {
             knex('url').insert({

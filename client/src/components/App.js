@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Layout, Input, Button, Row, Col, Modal } from "antd";
 import "./App.css";
 import UserDisplay from "./UserDisplay";
+import UrlDisplay from './UrlDisplay';
 
 const { Header, Footer, Content } = Layout;
 
@@ -108,6 +109,7 @@ class App extends Component {
               </Col>
               <Col lg={2} />
             </Row>
+          <UrlDisplay/>
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }} className="App-footer">
