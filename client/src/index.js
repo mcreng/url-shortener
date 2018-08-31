@@ -47,7 +47,7 @@ ReactDOM.render(
       <PrivateRoute exact path="/" component={App} />
       <Route exact path="/login" component={Login}/>
       <Route path="/:id" render={(props) => (
-      <AppRedirect {...this.props} {...props}/>)}/>
+        <AppRedirect {...this.props} {...props}/>)}/>
       {/* <Route render={() => <Redirect to="/" />} /> */}
     </Switch>
   </BrowserRouter>,

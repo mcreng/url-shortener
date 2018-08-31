@@ -3,6 +3,7 @@ import { Layout, Input, Button, Row, Col, Modal } from "antd";
 import "./App.css";
 import UserDisplay from "./UserDisplay";
 import UrlDisplay from './UrlDisplay';
+import CopyToClipboard from "./CopyToClipboard";
 
 const { Header, Footer, Content } = Layout;
 
@@ -50,14 +51,7 @@ class App extends Component {
       cancelText: "OK",
       okText: "Save to Clipboard",
       // Copy body.surl to clipboard.
-      onOk: () => {
-        const el = document.createElement("textarea");
-        el.value = window.location.href + body.surl;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand("copy");
-        document.body.removeChild(el);
-      }
+      onOk: () => { CopyToClipboard(window.location.href + body.surl) }
     });
     
   }

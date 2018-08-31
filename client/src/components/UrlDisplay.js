@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Layout, Input, Button, Row, Col, Table, Divider } from "antd";
-import "./App.css";
-import UserDisplay from "./UserDisplay";
+import CopyToClipboard from "./CopyToClipboard";
 
 const { Header, Footer, Content } = Layout;
 
@@ -18,13 +17,15 @@ class UrlDisplay extends Component {
         title: 'Shortened URL',
         dataIndex: 'surl',
         key: 'surl',
-
+        width: 300,
       }, {
         title: 'Action',
         key: 'action',
+        fixed: 'right',
+        width: 300,
         render: (text, record) => (
           <span>
-            <a href="javascript:;">Copy Shortened URL</a>
+            <a onClick={() => CopyToClipboard(window.location.href + record.surl)}>Copy Shortened URL</a>
             <Divider type="vertical" />
             <a href="javascript:;">Delete</a>
           </span>
@@ -40,7 +41,7 @@ class UrlDisplay extends Component {
 
   render() {
     return (
-        <Table dataSource={this.state.data} columns={this.columns} />
+        <Table dataSource={this.state.data} columns={this.columns} scroll={{ x: 1500, y: 300 }} />
     );
   }
 }
