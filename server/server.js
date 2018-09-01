@@ -19,7 +19,7 @@ app.use(session({
       console.log(`Request object sessionID from client: ${req.sessionID}`)
       return uuid() // use UUIDs for session IDs
     },
-    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({url: process.env.SESSION_DB_URL})

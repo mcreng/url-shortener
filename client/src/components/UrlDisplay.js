@@ -37,6 +37,8 @@ class UrlDisplay extends Component {
     .then( req => this.setState({data: req}) )
   }
 
+//   TODO: After adding shortened url, update table as well
+//   TODO: Add delete url capability
   render() {
     return (
         <Table className="url-display-table" dataSource={this.state.data} columns={this.columns} scroll={{ x: 1500, y: 300 }} />
