@@ -1,6 +1,0 @@
-@import "~antd/dist/antd.css";
-
-/* workaround for not being able to modify the color of anticon */
-.modal-surl .anticon {
-  color: #52c41a !important;
-}
