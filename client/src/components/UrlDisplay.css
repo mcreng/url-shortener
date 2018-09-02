@@ -1,11 +1,11 @@
 @import "~antd/dist/antd.css";
 
 span.user-span {
-    color: white;
-    line-height: 10vh;
-    font-size: 2vh;
+  color: white;
+  line-height: 10vh;
+  font-size: 2vh;
 }
 
 .url-display-table {
-    padding-top: 5vh !important;
+  padding-top: 5vh !important;
 }

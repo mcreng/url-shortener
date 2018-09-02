@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Layout, Row, Col } from "antd";
 import "./App.css";
 import UserDisplay from "./components/UserDisplay";
-import UrlDisplay from './components/UrlDisplay';
+import UrlDisplay from "./components/UrlDisplay";
 import UrlInput from "./components/UrlInput";
 
 const { Header, Footer, Content } = Layout;
 
 class App extends Component {
-
   render() {
     return (
       <div className="App">
@@ -18,13 +17,13 @@ class App extends Component {
               <p>URL Shortener</p>
             </Col>
             <Col className="App-header-user-col" span={5} offset={2}>
-              <UserDisplay/>
+              <UserDisplay />
             </Col>
           </Row>
         </Header>
         <Content className="App-content">
-          <UrlInput className="App-url-input"/>
-          <UrlDisplay className="App-url-display"/>
+          <UrlInput className="App-url-input" />
+          <UrlDisplay className="App-url-display" />
         </Content>
         <Footer style={{ textAlign: "center" }} className="App-footer">
           Using Nodejs, PostgreSQL, express, knex as backend; React, AntDesign

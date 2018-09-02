@@ -33,17 +33,17 @@ class Login extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ token: id_token })
-      }).then( req => req.json() )
-      .then( req => {
-        if (req) {
-          Auth.setUser(googleUser);
-          Auth.authenticate(req, this.setState({ redirectToReferrer: true }));
-        } else {
-          console.log("Not authenticated...");
-        }
       })
-
-    }
+        .then(req => req.json())
+        .then(req => {
+          if (req) {
+            Auth.setUser(googleUser);
+            Auth.authenticate(req, this.setState({ redirectToReferrer: true }));
+          } else {
+            console.log("Not authenticated...");
+          }
+        });
+    };
   }
 
   render() {
@@ -54,7 +54,6 @@ class Login extends Component {
       return <Redirect to={from} />;
     }
     return (
-
       <Content className="App-content">
         <div>
           <MetaTags>
@@ -63,7 +62,7 @@ class Login extends Component {
               content="259902397583-g94c052uvh0urlk2r83a711icpuuuqo8.apps.googleusercontent.com"
             />
           </MetaTags>
-          <div className="g-signin2" data-onsuccess="onSignin"></div>
+          <div className="g-signin2" data-onsuccess="onSignin" />
         </div>
       </Content>
     );
