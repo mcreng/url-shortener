@@ -1,0 +1,2 @@
+export const UPDATE_URL_TABLE = "UPDATE_URL_TABLE";
+export const FETCH_URL_TABLE = "FETCH_URL_TABLE";

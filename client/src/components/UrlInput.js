@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Layout, Input, Button, Row, Col, Modal } from "antd";
 import CopyToClipboard from "./CopyToClipboard";
+import { connect } from "react-redux";
+import { updateTable } from "../actions/UpdateTableAction";
 
 const { Header, Footer, Content } = Layout;
 
@@ -34,7 +36,10 @@ class UrlInput extends Component {
     const body = await response
       .json()
       .then(this.setState({ shortening: false }));
+
     if (response.status !== 200) throw Error(body.message);
+
+    this.props.updateTable();
 
     Modal.confirm({
       className: "modal-surl",
@@ -92,4 +97,7 @@ class UrlInput extends Component {
   }
 }
 
-export default UrlInput;
+export default connect(
+  null,
+  { updateTable }
+)(UrlInput);

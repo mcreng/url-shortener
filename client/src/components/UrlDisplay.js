@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Table, Divider } from "antd";
 import CopyToClipboard from "./CopyToClipboard";
+import { connect } from "react-redux";
+import { updateTable } from "../actions/UpdateTableAction";
 import "./UrlDisplay.css";
 class UrlDisplay extends Component {
   constructor(prop) {
     super(prop);
-    this.state = { data: null };
     this.columns = [
       {
         title: "Original URL",
@@ -41,23 +42,31 @@ class UrlDisplay extends Component {
   }
 
   componentWillMount() {
-    fetch("/api/url")
-      .then(req => req.json())
-      .then(req => this.setState({ data: req }));
+    this.props.updateTable();
   }
 
-  //   TODO: After adding shortened url, update table as well
   //   TODO: Add delete url capability
   render() {
+    console.log(this.props.update_table);
     return (
-      <Table
-        className="url-display-table"
-        dataSource={this.state.data}
-        columns={this.columns}
-        scroll={{ x: 1500, y: 300 }}
-      />
+      <div>
+        <div>{this.props.update_table}</div>
+        <Table
+          className="url-display-table"
+          dataSource={this.props.url_list}
+          columns={this.columns}
+          scroll={{ x: 1500, y: 300 }}
+        />
+      </div>
     );
   }
 }
 
-export default UrlDisplay;
+const mapStateToProps = state => ({
+  url_list: state.update_table.url_list
+});
+
+export default connect(
+  mapStateToProps,
+  { updateTable }
+)(UrlDisplay);
