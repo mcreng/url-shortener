@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Layout, Input, Button, Row, Col, Modal } from "antd";
+import { Input, Button, Row, Col, Modal } from "antd";
 import CopyToClipboard from "./CopyToClipboard";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateTable } from "../actions/UpdateTableAction";
-
-const { Header, Footer, Content } = Layout;
 
 class UrlInput extends Component {
   constructor(prop) {
@@ -96,6 +95,10 @@ class UrlInput extends Component {
     );
   }
 }
+
+UrlInput.propTypes = {
+  updateTable: PropTypes.func.isRequired
+};
 
 export default connect(
   null,

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table, Divider } from "antd";
+import PropTypes from "prop-types";
 import CopyToClipboard from "./CopyToClipboard";
 import { connect } from "react-redux";
 import { updateTable } from "../actions/UpdateTableAction";
@@ -47,20 +48,21 @@ class UrlDisplay extends Component {
 
   //   TODO: Add delete url capability
   render() {
-    console.log(this.props.update_table);
     return (
-      <div>
-        <div>{this.props.update_table}</div>
-        <Table
-          className="url-display-table"
-          dataSource={this.props.url_list}
-          columns={this.columns}
-          scroll={{ x: 1500, y: 300 }}
-        />
-      </div>
+      <Table
+        className="url-display-table"
+        dataSource={this.props.url_list}
+        columns={this.columns}
+        scroll={{ x: 1500, y: 300 }}
+      />
     );
   }
 }
+
+UrlDisplay.propTypes = {
+  updateTable: PropTypes.func.isRequired,
+  url_list: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => ({
   url_list: state.update_table.url_list
