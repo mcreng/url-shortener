@@ -36,8 +36,8 @@ class UrlDisplay extends Component {
             </a>
             <Divider type="vertical" />
             <a
-              onClick={() => {
-                fetch("/api/url", {
+              onClick={async () => {
+                await fetch("/api/url", {
                   method: "DELETE",
                   headers: {
                     Accept: "application/json",
@@ -76,7 +76,7 @@ class UrlDisplay extends Component {
 
 UrlDisplay.propTypes = {
   updateTable: PropTypes.func.isRequired,
-  url_list: PropTypes.array.isRequired
+  url_list: PropTypes.array
 };
 
 const mapStateToProps = state => ({
