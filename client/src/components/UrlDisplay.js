@@ -35,7 +35,22 @@ class UrlDisplay extends Component {
               Copy Shortened URL
             </a>
             <Divider type="vertical" />
-            <a href="javascript:;">Delete</a>
+            <a
+              onClick={() => {
+                fetch("/api/url", {
+                  method: "DELETE",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({ surl: record.surl })
+                })
+                  .then(console.log("deleted"))
+                  .then(this.props.updateTable());
+              }}
+            >
+              Delete
+            </a>
           </span>
         )
       }
