@@ -8,6 +8,10 @@ import UrlInput from "./components/UrlInput";
 const { Header, Footer, Content } = Layout;
 
 class App extends Component {
+  componentWillMount() {
+    document.title = "mcreng's URL Shortener";
+  }
+
   render() {
     return (
       <div className="App">
