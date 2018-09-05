@@ -37,10 +37,11 @@ async function checkAuth() {
     .then(req => req.json())
     .then(async req => {
       if (req.auth) {
-        await fetch(
+        const response = await fetch(
           `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${req.token}`
-        )
-          .then(authreq => authreq.json())
+        );
+        await response
+          .json()
           .then(authreq => {
             Auth.setName(authreq.name);
             Auth.setImage(authreq.picture);

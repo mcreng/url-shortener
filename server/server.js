@@ -46,7 +46,7 @@ app
         .then(res.status(200).send({ surl: surl }))
         .then(console.log(`${req.body.url} shortened to ${surl}.`));
     });
-  })
+  }) // TODO: Cannot handle delete to 0 data yet (404)
   .delete((req, res) => {
     knex("url")
       .where({ surl: req.body.surl, user_id: req.session.user_id })
@@ -96,10 +96,10 @@ app
   });
 
 app.route("/api/auth/logout").post((req, res) => {
-  req.session.destroy();
   console.log(
     `${req.session.user_id} with session ID ${req.sessionID} logged out`
   );
+  req.session.destroy(() => res.sendStatus(200));
 });
 
 app.get("*", (req, res) => {

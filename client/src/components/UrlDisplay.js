@@ -37,16 +37,16 @@ class UrlDisplay extends Component {
             <Divider type="vertical" />
             <a
               onClick={async () => {
-                await fetch("/api/url", {
+                // TODO: Implement a redux where includes the whole thing -> fix loading
+                const response = await fetch("/api/url", {
                   method: "DELETE",
                   headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json"
                   },
                   body: JSON.stringify({ surl: record.surl })
-                })
-                  .then(console.log("deleted"))
-                  .then(this.props.updateTable());
+                });
+                this.props.updateTable();
               }}
             >
               Delete
@@ -61,7 +61,6 @@ class UrlDisplay extends Component {
     this.props.updateTable();
   }
 
-  //   TODO: Add delete url capability
   render() {
     return (
       <Table
@@ -69,6 +68,7 @@ class UrlDisplay extends Component {
         dataSource={this.props.url_list}
         columns={this.columns}
         scroll={{ x: 1500, y: 300 }}
+        loading={this.props.loading}
       />
     );
   }
@@ -76,11 +76,13 @@ class UrlDisplay extends Component {
 
 UrlDisplay.propTypes = {
   updateTable: PropTypes.func.isRequired,
-  url_list: PropTypes.array
+  url_list: PropTypes.array,
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  url_list: state.update_table.url_list
+  url_list: state.update_table.url_list,
+  loading: state.update_table.loading
 });
 
 export default connect(

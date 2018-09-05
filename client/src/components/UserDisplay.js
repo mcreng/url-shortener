@@ -9,16 +9,18 @@ class UserDisplay extends Component {
   constructor(prop) {
     super(prop);
     this.logout = this.logout.bind(this);
-    this.state = [{redirect: false}];
+    this.state = [{ redirect: false }];
   }
 
-  logout() {
-    Auth.authenticate(false, () => {})
+  async logout() {
+    Auth.authenticate(false, () => {});
     Auth.disconnect();
     Auth.resetUser();
-    fetch("/api/auth/logout", {
+    const response = await fetch("/api/auth/logout", {
       method: "POST"
-    }).then( this.setState({redirect: true}))
+    });
+    console.log(`response: ${response}.`);
+    this.setState({ redirect: true });
   }
 
   render() {
@@ -28,8 +30,10 @@ class UserDisplay extends Component {
     return (
       <span className="user-span">
         Hello {Auth.getName()}!
-        <Avatar className="user-avatar" src={Auth.getImageUrl()}/>  
-        <Button onClick={this.logout} className="user-logout">Logout</Button>
+        <Avatar className="user-avatar" src={Auth.getImageUrl()} />
+        <Button onClick={this.logout} className="user-logout">
+          Logout
+        </Button>
       </span>
     );
   }
