@@ -19,7 +19,6 @@ class UserDisplay extends Component {
     const response = await fetch("/api/auth/logout", {
       method: "POST"
     });
-    console.log(`response: ${response}.`);
     this.setState({ redirect: true });
   }
 

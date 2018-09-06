@@ -24,7 +24,6 @@ class Login extends Component {
     var t = document.getElementsByTagName("script")[0];
     t.parentNode.insertBefore(e, t);
     window.onSignin = googleUser => {
-      console.log(googleUser);
       var id_token = googleUser.getAuthResponse().id_token;
       fetch("/api/auth", {
         method: "POST",

@@ -3,7 +3,7 @@ import { Table, Divider } from "antd";
 import PropTypes from "prop-types";
 import CopyToClipboard from "./CopyToClipboard";
 import { connect } from "react-redux";
-import { updateTable } from "../actions/UpdateTableAction";
+import { updateTable, deleteEntry } from "../actions/UpdateTableAction";
 import "./UrlDisplay.css";
 class UrlDisplay extends Component {
   constructor(prop) {
@@ -38,15 +38,7 @@ class UrlDisplay extends Component {
             <a
               onClick={async () => {
                 // TODO: Implement a redux where includes the whole thing -> fix loading
-                const response = await fetch("/api/url", {
-                  method: "DELETE",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({ surl: record.surl })
-                });
-                this.props.updateTable();
+                this.props.deleteEntry(record.surl);
               }}
             >
               Delete
@@ -76,6 +68,7 @@ class UrlDisplay extends Component {
 
 UrlDisplay.propTypes = {
   updateTable: PropTypes.func.isRequired,
+  deleteEntry: PropTypes.func.isRequired,
   url_list: PropTypes.array,
   loading: PropTypes.bool
 };
@@ -87,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateTable }
+  { updateTable, deleteEntry }
 )(UrlDisplay);
